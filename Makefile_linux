@@ -1,0 +1,17 @@
+RM=/usr/bin/rm
+RMFLAGS=-f
+
+CC=gcc
+CFLAGS=-I. -lm
+ 
+DEPS = args.h constraint.h context.h error.h main.h ndiff.h register.h slice.h types.h utest.h utils.h
+OBJ = args.c constraint.c context.c error.c main.c ndiff.c register.c utest.c utils.c
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+ndiff: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+	
+clean:
+	$(RM) ndiff *.o *~
